@@ -14,8 +14,7 @@ from video_formats import VIDEO_FORMATS
 
 def batchTanscode():
     currentDir = os.getcwd()
-    sourceDir = path.join(currentDir, 'source')
-    destDir = path.join(currentDir, 'dest')
+    sourceDir = path.join(currentDir, 'workspace')
 
     sourceFiles = []
     for (dir, dirNames, fileNames) in os.walk(sourceDir):
@@ -27,15 +26,25 @@ def batchTanscode():
         break
     sourceFiles = sorted(sourceFiles)
 
-    filesPath = path.join(destDir, "files.txt")
+    filesPath = path.join(sourceDir, "files.txt")
     files = open(filesPath, 'w')
     for sourceFile in sourceFiles:
         print('file \'{0}\''.format(sourceFile), file=files)
     files.close()
 
-    destFile = path.join(destDir, path.basename(sourceFiles[0]))
+    baseName, ext = path.splitext(path.basename(sourceFiles[0]))
+    destFile = path.join(currentDir, path.join(baseName + '_m', ext))
     command = './ffmpeg -f concat -safe 0 -i {0} -c copy {1}'.format(filesPath, destFile)
-    subprocess.call(shell=True, args=command)
+    ret = subprocess.call(shell=True, args=command)
+    if ret == 0:
+        backupDir = path.join(path.dirname(sourceDir), 'backup')
+        if not path.exists(backupDir):
+            os.makedirs(backupDir)
+
+        for sourceFile in sourceFiles:
+            fileName = path.basename(sourceFile)
+            backupFile = path.join(backupDir, fileName)
+            os.rename(sourceFile, backupFile)
 
 if __name__ == '__main__':
     batchTanscode()
