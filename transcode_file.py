@@ -11,11 +11,11 @@ import subprocess
 class Commands(object):
     Hi422LosslesAudioCopy = './ffmpeg -i {input} -c:a copy -async 1 ' \
                             '-c:v libx264 -profile:v high422 -preset veryslow ' \
-                            '-pix_fmt yuv420p -q:a 0 -sn -threads 3 -y {output}'
+                            '-pix_fmt yuv420p -q:a 0 -sn -threads 8 -y {output}'
 
     Hi422LosslesAudioAAC = './ffmpeg -i {input} -c:a aac -async 1 ' \
                             '-c:v libx264 -profile:v high422 -preset veryslow ' \
-                            '-pix_fmt yuv420p -q:a 0 -sn -threads 3 -y {output}'
+                            '-pix_fmt yuv420p -q:a 0 -sn -threads 8 -y {output}'
 
     VideoCopyAudioAAC    = './ffmpeg -i {input} -c:a aac -async 1 -c:v copy -y {output}'
 
@@ -41,6 +41,6 @@ class Commands(object):
                                 '-pix_fmt yuv420p -q:a 0 -sn -threads 8 -y {output}'
 
 def transcodeFile(sourceFile, destFile):
-    command = Commands.Hi422VideoLighterAudioAAC.format(input=sourceFile, output=destFile)
+    command = Commands.Hi422LosslesAudioCopy.format(input=sourceFile, output=destFile)
     print(command)
     return subprocess.call(shell=True, args=command)
