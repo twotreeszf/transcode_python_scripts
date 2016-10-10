@@ -33,7 +33,7 @@ def batchTanscode():
     files.close()
 
     baseName, ext = path.splitext(path.basename(sourceFiles[0]))
-    destFile = path.join(currentDir, path.join(baseName + '_m', ext))
+    destFile = path.join(sourceDir, baseName + '_m' + ext)
     command = './ffmpeg -f concat -safe 0 -i {0} -c copy {1}'.format(filesPath, destFile)
     ret = subprocess.call(shell=True, args=command)
     if ret == 0:
