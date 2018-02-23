@@ -14,11 +14,11 @@ import tempfile
 Commands = {
 'VHighProfile_ACopy' : './ffmpeg -i {input} -c:a copy -async 1 ' \
                      '-c:v libx264 -profile:v high422 -preset veryslow ' \
-                     '-pix_fmt yuv420p -q:a 0 -sn -threads 24 -y {output}',
+                     '-pix_fmt yuv420p -q:a 0 -sn -threads 16 -y {output}',
 
 'VHighProfile_AAAC' : './ffmpeg -i {input} -c:a aac -async 1 ' \
                     '-c:v libx264 -profile:v high422 -preset veryslow ' \
-                    '-pix_fmt yuv420p -q:a 0 -sn -threads 24 -y {output}',
+                    '-pix_fmt yuv420p -q:a 0 -sn -threads 16 -y {output}',
 
 'VCopy_AAAC' : './ffmpeg -i {input} -c:a aac -async 1 -c:v copy -y {output}',
 
@@ -37,7 +37,7 @@ Commands = {
                        '-c:a aac -async 1 ' \
                        '-vf eq=1:0.2:1.5:1:1:1:1:1 ' \
                        '-c:v libx264 -profile:v high422 -preset veryslow ' \
-                       '-pix_fmt yuv420p -q:a 0 -sn -threads 24 -y {output}',
+                       '-pix_fmt yuv420p -q:a 0 -sn -threads 16 -y {output}',
 
 'MTS2MP4' : './ffmpeg -i {input} -c:v copy -c:a aac -b:a 256k {output}'
 }
