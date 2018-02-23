@@ -6,4 +6,4 @@ Date:       2016/08/17 16:16
 Desc:       
 """
 
-VIDEO_FORMATS = ['.mov', '.mp4', '.mts']
+VIDEO_FORMATS = ['.mov', '.mp4', '.mts', '.mod', '.avi', '.wmv', '.3gp', '.mpg', '.mkv', '.ts']
