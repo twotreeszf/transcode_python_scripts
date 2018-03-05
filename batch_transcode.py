@@ -62,8 +62,10 @@ if __name__ == '__main__':
         i += 1
 
     index = None
+    try: input = raw_input
+    except NameError: pass
     try:
-        index = int(raw_input('select:'))
+        index = int(input('select:'))
     except ValueError:
         print('Not a number')
 
