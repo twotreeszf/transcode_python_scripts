@@ -54,7 +54,7 @@ if __name__ == '__main__':
     print('select command to process')
 
     i = 1
-    keys = Commands.keys()
+    keys = list(Commands.keys())
     for key in keys:
         print('{0}. {1}'.format(i, key))
         print(Commands[key])
