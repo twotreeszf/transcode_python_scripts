@@ -65,7 +65,7 @@ if __name__ == '__main__':
     try:
         index = int(raw_input('select:'))
     except ValueError:
-        print "Not a number"
+        print('Not a number')
 
     selectedCommand = Commands[keys[index - 1]]
     batchProcess(selectedCommand)
