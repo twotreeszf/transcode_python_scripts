@@ -15,12 +15,16 @@ import multiprocessing
 
 Commands = {
 'VHighProfile_ACopy' : './ffmpeg -i {input} -c:a copy -async 1 ' \
-                     '-c:v libx264 -profile:v high422 -preset veryslow ' \
+                     '-c:v libx265 -profile:v main444-8 -preset veryslow ' \
                      '-pix_fmt yuv420p -q:a 0 -sn -threads {cpu_count} -y {output}',
 
 'VHighProfile_AAAC' : './ffmpeg -i {input} -c:a aac -async 1 ' \
-                    '-c:v libx264 -profile:v high422 -preset veryslow ' \
+                    '-c:v libx265 -profile:v main444-8 -preset veryslow ' \
                     '-pix_fmt yuv420p -q:a 0 -sn -threads {cpu_count} -y {output}',
+
+'VHighProfile_AAAC_Gray' : './ffmpeg -i {input} -c:a aac -async 1 ' \
+                    '-c:v libx265 -profile:v main444-8 -preset veryslow ' \
+                    '-vf format=gray -pix_fmt yuv420p -q:a 0 -sn -threads {cpu_count} -y {output}',
 
 'VCopy_AAAC' : './ffmpeg -i {input} -c:a aac -async 1 -c:v copy -y {output}',
 
