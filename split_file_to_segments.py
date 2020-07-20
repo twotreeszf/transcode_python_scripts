@@ -7,8 +7,6 @@ Desc:
 """
 
 import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 from os import path
 import subprocess
 

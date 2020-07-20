@@ -1,0 +1,1 @@
+ffmpeg -i https://vod.hundun.cn/2a7e33a024a74e868899b08180fa98f8/7c25a397769342e6b6214e01165caad5-4e411fb8f873c143be1a4fc3d5b6bd48-ld.m3u8\?auth_key\=1592015583-0-0-e6f3cbcd542ca620372b396bbcf3a011 -c copy -bsf:a aac_adtstoasc output.mp4

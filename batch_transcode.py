@@ -17,7 +17,7 @@ def batchProcess(command):
     sourceDir = path.join(currentDir, 'workspace')
     sourceFiles = []
 
-    for (dir, dirNames, fileNames) in os.walk(sourceDir):
+    for (dir, dirNames, fileNames) in os.walk(sourceDir, followlinks=True):
         for fileName in fileNames:
             baseName, extName = path.splitext(fileName)
             if extName.lower() in VIDEO_FORMATS:
