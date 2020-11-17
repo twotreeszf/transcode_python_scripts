@@ -10,12 +10,13 @@ import os
 import sys
 from os import path
 from video_formats import VIDEO_FORMATS
+from video_formats import PHOTO_FORMATS
 
 def processInFolder(folder):
     for (dir, dirNames, fileNames) in os.walk(folder):
         for fileName in fileNames:
             baseName, extName = path.splitext(fileName)
-            if extName.lower() in VIDEO_FORMATS:
+            if extName.lower() in VIDEO_FORMATS or extName.lower() in PHOTO_FORMATS:
                 filePath = path.join(dir, fileName)
                 relativePath = path.relpath(filePath, folder)
                 longFileName = relativePath.replace('/', '_')
