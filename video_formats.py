@@ -7,4 +7,3 @@ Desc:
 """
 
 VIDEO_FORMATS = ['.mov', '.m4v', '.mp4', '.mts', '.mod', '.avi', '.wmv', '.3gp', '.mpg', '.mkv', '.ts', '.asf', '.flv', '.rmvb']
-PHOTO_FORMATS = ['.jpg', '.png']

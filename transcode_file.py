@@ -9,8 +9,8 @@ Desc:
 import os
 from os import path
 import subprocess
-import tempfile
 import multiprocessing
+import uuid
 
 
 Commands = {
@@ -44,7 +44,7 @@ Commands = {
 def transcodeFile(workspace, sourceFile, command):
     relativePath = path.relpath(sourceFile, workspace)
 
-    tmpFile = path.join(path.dirname(workspace), 'temp', '{}.mp4'.format(hash(os.times())))
+    tmpFile = path.join(path.dirname(workspace), 'temp', '{}.mp4'.format(uuid.uuid4()))
     tmpDir = path.dirname(tmpFile)
     if not path.exists(tmpDir):
         os.makedirs(tmpDir)
