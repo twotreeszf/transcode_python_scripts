@@ -16,13 +16,15 @@ def processInFolder(folder):
     for (dir, dirNames, fileNames) in os.walk(folder):
         for fileName in fileNames:
             baseName, extName = path.splitext(fileName)
-            if extName.lower() in VIDEO_FORMATS or extName.lower() in IMAGE_FORMATS:
-                filePath = path.join(dir, fileName)
-                relativePath = path.relpath(filePath, folder)
-                longFileName = relativePath.replace('/', '_')
-                longFilePath = path.join(folder, longFileName)
-                if longFilePath != filePath:
-                    os.rename(filePath, longFilePath)
+            extName = extName.lower()
+            if baseName[0] != '.':
+                if extName.lower() in VIDEO_FORMATS or extName.lower() in IMAGE_FORMATS:
+                    filePath = path.join(dir, fileName)
+                    relativePath = path.relpath(filePath, folder)
+                    longFileName = relativePath.replace('/', '_')
+                    longFilePath = path.join(folder, longFileName)
+                    if longFilePath != filePath:
+                        os.rename(filePath, longFilePath)
 
 
 if __name__ == '__main__':
