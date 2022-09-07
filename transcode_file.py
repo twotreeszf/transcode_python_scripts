@@ -29,8 +29,8 @@ Commands = {
                     '-c:v libx264 -profile:v high422 -preset veryslow ' \
                     '-pix_fmt yuv420p -crf 18 -maxrate 4M -bufsize 4M -sn -threads {cpu_count} -y {output}',
 
-'VH265HighGray_AAAC' : './ffmpeg -i {input} -c:a aac -async 1 ' \
-                    '-c:v libx265 -profile:v main444-8 -preset veryslow ' \
+'VH264HighGray_AAAC' : './ffmpeg -i {input} -c:a aac -async 1 ' \
+                    '-c:v libx264 -profile:v high422 -preset veryslow ' \
                     '-vf format=gray -pix_fmt yuv420p -crf 18 -maxrate 4M -bufsize 4M -sn -threads {cpu_count} -y {output}',
 
 'VCopy_AAAC' : './ffmpeg -i {input} -c:a aac -async 1 -c:v copy -y {output}',
