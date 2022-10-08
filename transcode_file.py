@@ -29,6 +29,10 @@ Commands = {
                     '-c:v libx264 -profile:v high422 -preset veryslow ' \
                     '-pix_fmt yuv420p -crf 18 -maxrate 4M -bufsize 4M -sn -threads {cpu_count} -y {output}',
 
+'VH264VeryHigh_AAAC' : './ffmpeg -i {input} -c:a aac -async 1 ' \
+                    '-c:v libx264 -profile:v high422 -preset veryslow ' \
+                    '-pix_fmt yuv420p -crf 18 -maxrate 16M -bufsize 16M -sn -threads {cpu_count} -y {output}',
+
 'VH264HighGray_AAAC' : './ffmpeg -i {input} -c:a aac -async 1 ' \
                     '-c:v libx264 -profile:v high422 -preset veryslow ' \
                     '-vf format=gray -pix_fmt yuv420p -crf 18 -maxrate 4M -bufsize 4M -sn -threads {cpu_count} -y {output}',
