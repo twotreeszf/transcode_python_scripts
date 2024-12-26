@@ -55,11 +55,22 @@ def transcodeFile(workspace, sourceFile, command):
 
     cpuCount = min(multiprocessing.cpu_count(), 16)
 
-    escaped_source = sourceFile.replace("'", "\\'")
-    escaped_tmp = tmpFile.replace("'", "\\'")
-    exeCommand = command.format(input="'" + escaped_source + "'", output="'" + escaped_tmp + "'", cpu_count=cpuCount)
-    print(exeCommand)
-    ret = subprocess.call(shell=True, args=exeCommand)
+    # Split the command into a list and replace placeholders
+    cmd_parts = command.split()
+    cmd_list = []
+    for part in cmd_parts:
+        if '{input}' in part:
+            cmd_list.append(part.format(input=sourceFile))
+        elif '{output}' in part:
+            cmd_list.append(part.format(output=tmpFile))
+        elif '{cpu_count}' in part:
+            cmd_list.append(part.format(cpu_count=cpuCount))
+        else:
+            cmd_list.append(part)
+
+    print(' '.join(cmd_list))
+    ret = subprocess.call(cmd_list)
+
     if (ret == 0):
         backupFile = path.join(path.dirname(workspace), 'backup', relativePath)
         backupDir = path.dirname(backupFile)
