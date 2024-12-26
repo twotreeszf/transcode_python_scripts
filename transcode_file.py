@@ -45,6 +45,7 @@ Commands = {
 
 
 def transcodeFile(workspace, sourceFile, command):
+    
     relativePath = path.relpath(sourceFile, workspace)
 
     tmpFile = path.join(path.dirname(workspace), 'temp', '{}.mp4'.format(uuid.uuid4()))
@@ -54,7 +55,9 @@ def transcodeFile(workspace, sourceFile, command):
 
     cpuCount = min(multiprocessing.cpu_count(), 16)
 
-    exeCommand = command.format(input="'" + sourceFile + "'", output="'" + tmpFile + "'", cpu_count=cpuCount)
+    escaped_source = sourceFile.replace("'", "\\'")
+    escaped_tmp = tmpFile.replace("'", "\\'")
+    exeCommand = command.format(input="'" + escaped_source + "'", output="'" + escaped_tmp + "'", cpu_count=cpuCount)
     print(exeCommand)
     ret = subprocess.call(shell=True, args=exeCommand)
     if (ret == 0):
