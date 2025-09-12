@@ -7,14 +7,15 @@ Desc:
 """
 
 from __future__ import print_function
+import sys
 import os
 from os import path
 import subprocess
 from video_formats import VIDEO_FORMATS
 
-def batchTanscode():
+def mergeFiles(sourceDir):
     currentDir = os.getcwd()
-    sourceDir = path.join(currentDir, 'workspace')
+    sourceDir = path.join(currentDir, sourceDir)
 
     sourceFiles = []
     for (dir, dirNames, fileNames) in os.walk(sourceDir):
@@ -37,7 +38,7 @@ def batchTanscode():
     command = './ffmpeg -f concat -safe 0 -i {0} -c copy {1}'.format(filesPath, destFile)
     ret = subprocess.call(shell=True, args=command)
     if ret == 0:
-        backupDir = path.join(path.dirname(sourceDir), 'backup')
+        backupDir = path.join(currentDir, 'backup')
         if not path.exists(backupDir):
             os.makedirs(backupDir)
 
@@ -47,4 +48,5 @@ def batchTanscode():
             os.rename(sourceFile, backupFile)
 
 if __name__ == '__main__':
-    batchTanscode()
+    sourceDir = sys.argv[1]
+    mergeFiles(sourceDir)
